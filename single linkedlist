@@ -1,0 +1,140 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int insertAtFront(int );
+int insertAtLast(int );
+int insertAtMiddle(int ,int );
+struct node* createNode(int );
+void deleteAtFront();
+void deleteAtLast();
+void deleteAtMiddle(int );
+void printIt();
+
+
+struct node
+{
+    int data;
+    struct node*next;
+};
+
+struct node* head=NULL;
+
+int main()
+{
+    int n,x;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        //insertAtFront(x);
+        insertAtLast(x);
+    }
+    insertAtMiddle(100,3);
+    printIt();
+    deleteAtFront();
+    printIt();
+    deleteAtLast();
+    printIt();
+    deleteAtMiddle(3);
+    printIt();
+}
+
+
+int insertAtFront(int x)
+{
+    struct node* temp=createNode(x);
+    if(head==NULL)
+    {
+        head=temp;
+    }
+    else
+    {
+        temp->next=head;
+        head=temp;
+    }
+}
+
+
+int insertAtLast(int x)
+{
+    struct node* temp=createNode(x);
+    if(head==NULL)
+    {
+        head=temp;
+    }
+    else
+    {
+        struct node* p=head;
+        while(p->next!=NULL)
+        {
+            p=p->next;
+        }
+        p->next=temp;
+    }
+}
+
+
+int insertAtMiddle(int x,int n)
+{
+    struct node* temp=createNode(x);
+    struct node *p=head;
+    for(int i=1;i<n-1;i++)
+    {
+        p=p->next;
+    }
+    temp->next=p->next;
+    p->next=temp;
+}
+
+
+struct node* createNode(int x)
+{
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    newnode->next=NULL;
+    return newnode;
+}
+
+
+void deleteAtFront()
+{
+    head=head->next;
+}
+
+
+void deleteAtLast()
+{
+    struct node* temp=head;
+    struct node* p;
+    while(temp->next!=NULL)
+    {
+        p=temp;
+        temp=temp->next;
+    }
+    p->next=NULL;
+}
+
+
+void deleteAtMiddle(int n)
+{
+    struct node* temp=head;
+    struct node* p;
+    for(int i=1;i<n;i++)
+    {
+        p=temp;
+        temp=temp->next;
+    }
+    p->next=temp->next;
+}
+
+
+void printIt()
+{
+    struct node* temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+    printf("\n");
+}
