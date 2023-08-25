@@ -1,0 +1,42 @@
+#include<stdio.h>
+#define size 100
+int queue[size];
+int front=-1;
+int rear=-1;
+int enqueue(int );
+int dequeue();
+void printIt();
+int main()
+{
+    int n,x;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        enqueue(x);
+    }
+    printIt();
+}
+int enqueue(int x)
+{
+    if(front==-1)
+    {
+        front++;
+        rear++;
+    }
+    if(rear>=size-1)
+    {
+        printf("Queue Overflow");
+    }
+    else
+    {
+        queue[rear++]=x;
+    }
+}
+void printIt()
+{
+    while(front<=rear)
+    {
+        printf("%d ",queue[front++]);
+    }
+}
